@@ -22,13 +22,18 @@
     </target>
 
     <target name="dist" depends="clean, compile">
+        <exec executable="git" outputproperty="git.revision">
+            <arg value="rev-parse" />
+            <arg value="--short" />
+            <arg value="HEAD" />
+        </exec>
         <mkdir dir="${dist.dir}"/>
-        <jar basedir="${target.dir}" destfile="${dist.dir}/${jar.name}.jar" manifest="MANIFEST.MF">
+        <jar basedir="${target.dir}" destfile="${dist.dir}/${jar.name}-${git.revision}.jar" manifest="MANIFEST.MF">
             <zipgroupfileset dir="lib">
                 <exclude name="sqlworkbench.jar"/>
             </zipgroupfileset>
         </jar>
-        <zip destfile="${dist.dir}/${zip.base.name}.zip">
+        <zip destfile="${dist.dir}/${zip.base.name}-${git.revision}.zip">
             <fileset file="${dist.dir}/*.jar"/>
             <fileset file="README"/>
         </zip>

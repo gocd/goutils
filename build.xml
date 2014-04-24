@@ -1,0 +1,36 @@
+<project name="Schema Creator" default="dist" basedir=".">
+
+    <property name="target.dir" value="target"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="jar.name" value="goutils"/>
+    <property name="zip.base.name" value="goutils"/>
+
+    <path id="compile.classpath">
+        <fileset dir="lib">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="clean">
+        <delete dir="${target.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${target.dir}"/>
+        <javac srcdir="src" destdir="${target.dir}" classpathref="compile.classpath" includeantruntime="false"/>
+    </target>
+
+    <target name="dist" depends="clean, compile">
+        <mkdir dir="${dist.dir}"/>
+        <jar basedir="${target.dir}" destfile="${dist.dir}/${jar.name}.jar" manifest="MANIFEST.MF">
+            <zipgroupfileset dir="lib">
+                <exclude name="sqlworkbench.jar"/>
+            </zipgroupfileset>
+        </jar>
+        <zip destfile="${dist.dir}/${zip.base.name}.zip">
+            <fileset file="${dist.dir}/*.jar"/>
+            <fileset file="README"/>
+        </zip>
+    </target>
+</project>

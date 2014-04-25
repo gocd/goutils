@@ -35,7 +35,7 @@
         </jar>
         <zip destfile="${dist.dir}/${zip.base.name}-${git.revision}.zip">
             <fileset file="${dist.dir}/*.jar"/>
-            <fileset file="README"/>
+            <fileset file="README.md"/>
         </zip>
     </target>
 </project>

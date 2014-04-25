@@ -1,9 +1,20 @@
 <project name="Schema Creator" default="dist" basedir=".">
 
     <property name="target.dir" value="target"/>
+	<property name="target.src" value="${target.dir}/src"/>
+	<property name="target.test" value="${target.dir}/test"/>
     <property name="dist.dir" value="dist"/>
     <property name="jar.name" value="goutils"/>
     <property name="zip.base.name" value="goutils"/>
+	<property name="test.reports.dir" value="${target.test}/reports"/>
+	
+	<taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask">
+        <classpath>
+            <path id="junit.test">
+                <fileset dir="." includes="lib/ant-junit.jar, lib/junit*.jar"/>
+            </path>
+        </classpath>
+    </taskdef>
 
     <path id="compile.classpath">
         <fileset dir="lib">
@@ -18,19 +29,46 @@
 
     <target name="compile">
         <mkdir dir="${target.dir}"/>
-        <javac srcdir="src" destdir="${target.dir}" classpathref="compile.classpath" includeantruntime="false"/>
+		<mkdir dir="${target.src}" />
+		<mkdir dir="${target.test}" />
+        <javac srcdir="src" destdir="${target.src}" classpathref="compile.classpath" includeantruntime="false"/>
+		<javac srcdir="test" destdir="${target.test}" includeantruntime="false">
+            <classpath refid="compile.classpath"/>
+            <classpath location="${target.src}"/>
+        </javac>
     </target>
+	
+	<target name="test" depends="compile">
+		<mkdir dir="${test.reports.dir}" />
+	    <junit failureproperty="test.failed">
+	        <classpath>
+	            <path refid="compile.classpath"/>
+	            <pathelement location="${target.src}"/>
+	            <pathelement location="${target.test}"/>
+	        </classpath>
+	        <formatter type="plain"/>
+	        <batchtest fork="yes" todir="${test.reports.dir}">
+	            <fileset dir="test">
+	                <include name="**/*Test*.java"/>
+	            </fileset>
+	        </batchtest>
+	    </junit>
+	    <fail message="Test failure detected, check test results." if="test.failed"/>
+	</target>
 
-    <target name="dist" depends="clean, compile">
+    <target name="dist" depends="clean, compile, test">
         <exec executable="git" outputproperty="git.revision">
             <arg value="rev-parse" />
             <arg value="--short" />
             <arg value="HEAD" />
         </exec>
         <mkdir dir="${dist.dir}"/>
-        <jar basedir="${target.dir}" destfile="${dist.dir}/${jar.name}-${git.revision}.jar" manifest="MANIFEST.MF">
+        <jar basedir="${target.src}" destfile="${dist.dir}/${jar.name}-${git.revision}.jar" manifest="MANIFEST.MF">
             <zipgroupfileset dir="lib">
                 <exclude name="sqlworkbench.jar"/>
+				<exclude name="ant-junit.jar"/>
+				<exclude name="hamcrest-core-1.3.jar"/>
+				<exclude name="junit-4.11.jar"/>
             </zipgroupfileset>
         </jar>
         <zip destfile="${dist.dir}/${zip.base.name}-${git.revision}.zip">

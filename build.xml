@@ -56,7 +56,7 @@
 	    <fail message="Test failure detected, check test results." if="test.failed"/>
 	</target>
 
-    <target name="dist" depends="clean, compile, test">
+    <target name="dist" depends="clean, compile">
         <exec executable="git" outputproperty="git.revision">
             <arg value="rev-parse" />
             <arg value="--short" />

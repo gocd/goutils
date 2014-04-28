@@ -34,3 +34,4 @@ java -cp goutils.jar com.thoughtworks.go.utils.export.tablebased.H2ToTableBasedS
 ```
 
 > NOTE: Make sure you provide the H2 database file location without the .h2.db extension
+

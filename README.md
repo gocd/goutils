@@ -35,3 +35,16 @@ java -cp goutils.jar com.thoughtworks.go.utils.export.tablebased.H2ToTableBasedS
 
 > NOTE: Make sure you provide the H2 database file location without the .h2.db extension
 
+### Go Cipher Text generator
+
+You can use Go's cipher key to convert plain text to cipher text. This can be directly fed into Go Configuration before saving.
+
+For e.g., if your
+
+- Go configuration directory is located at /etc/go, your cipher file will be at /etc/go/cipher
+
+you can run
+
+```bash
+java -cp goutils.jar:bcprov-jdk16-140.jar com.thoughtworks.go.utils.encryption.Encrypter /etc/go/cipher
+```

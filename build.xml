@@ -69,11 +69,14 @@
 				<exclude name="ant-junit.jar"/>
 				<exclude name="hamcrest-core-1.3.jar"/>
 				<exclude name="junit-4.11.jar"/>
+				<exclude name="bcprov-jdk16-140.jar"/>
             </zipgroupfileset>
         </jar>
         <zip destfile="${dist.dir}/${zip.base.name}-${git.revision}.zip">
-            <fileset file="${dist.dir}/*.jar"/>
+            <fileset file="${dist.dir}/${jar.name}-${git.revision}.jar"/>
+            <fileset file="${dist.dir}/../lib/bcprov-jdk16-140.jar"/>
             <fileset file="README.md"/>
         </zip>
+        <delete file="${dist.dir}/${jar.name}-${git.revision}.jar" verbose="true"/>
     </target>
 </project>

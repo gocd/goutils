@@ -21,10 +21,11 @@ public class Launcher {
     public static void main(String[] args) {
         String message = "Go Utilities\n" +
                 "--------------\n\n" +
-                "Usage: java -cp goutils.jar [options]\n\n" +
+                "Usage: java -cp goutils.jar:bcprov-jdk16-140.jar [options]\n\n" +
                 "options-\n" +
                 "com.thoughtworks.go.utils.primer.H2Primer\t\t\t\tMigrate Go's H2 database up to a schema version.\n" +
-                "com.thoughtworks.go.utils.export.tablebased.H2ToTableBasedSql\t\tExport data from Go's H2 database.\n";
+                "com.thoughtworks.go.utils.export.tablebased.H2ToTableBasedSql\t\tExport data from Go's H2 database.\n" +
+                "com.thoughtworks.go.utils.encryption.Encrypter\t\t\tEncrypt passwords using Go Cipher.\n";
         System.out.println(message);
 
     }

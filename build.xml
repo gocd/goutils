@@ -7,7 +7,7 @@
     <property name="jar.name" value="goutils"/>
     <property name="zip.base.name" value="goutils"/>
 	<property name="test.reports.dir" value="${target.test}/reports"/>
-	
+
 	<taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask">
         <classpath>
             <path id="junit.test">
@@ -63,7 +63,7 @@
             <arg value="HEAD" />
         </exec>
         <mkdir dir="${dist.dir}"/>
-        <jar basedir="${target.src}" destfile="${dist.dir}/${jar.name}-${git.revision}.jar" manifest="MANIFEST.MF">
+        <jar basedir="${target.src}" destfile="${dist.dir}/${jar.name}.jar">
             <zipgroupfileset dir="lib">
                 <exclude name="sqlworkbench.jar"/>
 				<exclude name="ant-junit.jar"/>
@@ -71,12 +71,18 @@
 				<exclude name="junit-4.11.jar"/>
 				<exclude name="bcprov-jdk16-140.jar"/>
             </zipgroupfileset>
+            <manifest>
+                <attribute name="Main-Class" value="com.thoughtworks.go.utils.Launcher" />
+                <attribute name="Class-Path" value="." />
+                <attribute name="Build-Version" value="${git.revision}" />
+            </manifest>
         </jar>
         <zip destfile="${dist.dir}/${zip.base.name}-${git.revision}.zip">
-            <fileset file="${dist.dir}/${jar.name}-${git.revision}.jar"/>
+            <fileset file="${dist.dir}/${jar.name}.jar"/>
             <fileset file="${dist.dir}/../lib/bcprov-jdk16-140.jar"/>
+            <fileset file="${dist.dir}/../run.sh"/>
             <fileset file="README.md"/>
         </zip>
-        <delete file="${dist.dir}/${jar.name}-${git.revision}.jar" verbose="true"/>
+        <delete file="${dist.dir}/${jar.name}.jar" verbose="true"/>
     </target>
 </project>

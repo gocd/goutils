@@ -57,7 +57,7 @@ public class Encrypter {
             if (validateConfirmation(password, confirmPassword)) {
                 File cipherFile = new File(cipherLocation);
                 String cipherText = cipher(FileUtils.readFileToByteArray(cipherFile), String.valueOf(confirmPassword));
-                System.out.println(String.format("Encrypted text for plain text %s is %s", String.valueOf(confirmPassword), cipherText));
+                System.out.println(String.format("Encrypted text: %s", cipherText));
             } else {
                 System.err.println("Password and confirmation do not match. Aborting...");
             }

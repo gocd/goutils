@@ -80,7 +80,6 @@
         <zip destfile="${dist.dir}/${zip.base.name}-${git.revision}.zip">
             <fileset file="${dist.dir}/${jar.name}.jar"/>
             <fileset file="${dist.dir}/../lib/bcprov-jdk16-140.jar"/>
-            <fileset file="${dist.dir}/../run.sh"/>
             <fileset file="README.md"/>
         </zip>
         <delete file="${dist.dir}/${jar.name}.jar" verbose="true"/>

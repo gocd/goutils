@@ -43,8 +43,14 @@ For e.g., if your
 
 - Go configuration directory is located at /etc/go, your cipher file will be at /etc/go/cipher
 
-you can run
+On Linux/Mac OSX, you can run
 
 ```bash
 java -cp goutils.jar:bcprov-jdk16-140.jar com.thoughtworks.go.utils.encryption.Encrypter /etc/go/cipher
+```
+
+On Windows,
+
+```bash
+java -cp goutils.jar;bcprov-jdk16-140.jar com.thoughtworks.go.utils.encryption.Encrypter /etc/go/cipher
 ```

@@ -45,7 +45,7 @@ public class H2ToTableBasedSql {
         }
     }
 
-    private void dump() throws Exception {
+    public void dump() throws Exception {
         generatePgSqlImportScript(outDir);
         generateTableSQL(h2, outDir);
     }

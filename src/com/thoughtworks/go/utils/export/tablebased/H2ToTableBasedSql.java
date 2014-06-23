@@ -18,7 +18,7 @@ public class H2ToTableBasedSql {
 
     private static List<String> TABLES = Arrays.asList("AGENTS", "ARTIFACTPLANS", "ARTIFACTPROPERTIESGENERATOR",
             "BUILDCAUSEBUFFER", "BUILDS", "BUILDSTATETRANSITIONS", "ENVIRONMENTVARIABLES", "GADGETOAUTHACCESSTOKENS",
-            "GADGETOAUTHAUTHORIZATIONCODES", "GADGETOAUTHCLIENTS", "LUAUSTATE", "LUAU_GROUPS", "LUAU_GROUPS_USERS", "MATERIALS",
+            "GADGETOAUTHAUTHORIZATIONCODES", "GADGETOAUTHCLIENTS", "MATERIALS",
             "MODIFICATIONS", "MODIFIEDFILES", "NOTIFICATIONFILTERS", "OAUTHAUTHORIZATIONS", "OAUTHCLIENTS", "OAUTHTOKENS",
             "PIPELINELABELCOUNTS", "PIPELINEMATERIALREVISIONS", "PIPELINES", "PIPELINESELECTIONS", "PREFFERED", "PROPERTIES",
             "RESOURCES", "SERVERBACKUPS", "STAGEARTIFACTCLEANUPPROHIBITED", "STAGES", "USERS");
@@ -116,8 +116,6 @@ public class H2ToTableBasedSql {
                 "select setval('gadgetOauthAccessTokens_id_seq', (select max(id) from gadgetoauthaccesstokens))",
                 "select setval('gadgetOauthAuthorizationCodes_id_seq', (select max(id) from gadgetoauthauthorizationcodes))",
                 "select setval('gadgetOauthClients_id_seq', (select max(id) from gadgetoauthclients))",
-                "select setval('luau_groups_id_seq', (select max(id) from luau_groups))",
-                "select setval('luauState_id_seq', (select max(id) from luaustate))",
                 "select setval('newMaterials_id_seq', (select max(id) from materials))",
                 "select setval('modifications_id_seq', (select max(id) from modifications))",
                 "select setval('modifiedFiles_id_seq', (select max(id) from modifiedFiles))",

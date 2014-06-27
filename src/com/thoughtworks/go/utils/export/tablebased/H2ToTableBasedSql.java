@@ -155,7 +155,7 @@ public class H2ToTableBasedSql {
 
 
     private static void migrateToCSV(String table, Connection h2c, File outFile) throws SQLException, IOException {
-        new Csv().write(h2c, outFile.getAbsolutePath(), "Select * from " + table, null);
+        new Csv().write(h2c, outFile.getAbsolutePath(), "Select * from " + table, "UTF-8");
     }
 
     private BasicDataSource connectToH2Db(String h2DbName) throws Exception {

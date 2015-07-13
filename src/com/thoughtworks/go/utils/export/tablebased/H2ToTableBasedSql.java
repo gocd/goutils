@@ -131,6 +131,7 @@ public class H2ToTableBasedSql {
                 "select setval('resources_id_seq', (select max(id) from resources))",
                 "select setval('serverBackups_id_seq', (select max(id) from serverbackups))",
                 "select setval('stageArtifactCleanupProhibited_id_seq', (select max(id) from stageartifactcleanupprohibited))",
+                "select setval('plugins_id_seq', (select max(id) from plugins))",
                 "select setval('stages_id_seq', (select max(id) from stages))", "select setval('usersettings_id_seq', (select max(id) from users))");
         IOUtils.writeLines(sequencesQuery, ";\n", os);
     }
